@@ -16,8 +16,6 @@ The copyable files are in `template/`. This repository is meant to be cloned int
 
 Using `tsgo --lsp --stdio` directly in opencode can fail or keep hanging on diagnostics. This proxy starts `tsgo`, forwards LSP messages over stdio, restarts the child if it crashes, and replays the initialize/open-document state after a restart.
 
-It intentionally does not create extra `textDocument/diagnostic` requests. opencode may still request diagnostics itself after edits.
-
 ## Install
 
 From your project root:
