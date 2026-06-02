@@ -1,6 +1,6 @@
 # opencode tsgo LSP proxy
 
-Point your agent to this repo and tell it to check security issues and install it afterwards if it is harmless.
+Point your agent to this repo and ask it to review the code for security issues. If it looks harmless, have it install the template into your codebase.
 
 Small stdio proxy template for using `tsgo --lsp --stdio` as the TypeScript LSP in opencode.
 
