@@ -10,7 +10,7 @@ Please review https://github.com/LeonMueller-OneAndOnly/opencode-tsgo-lsp-proxy 
 
 Small stdio proxy template for using `tsgo --lsp --stdio` as the TypeScript LSP in opencode.
 
-The copyable files are in `template/`. This repository is meant to be cloned into a temporary location by an agent, reviewed, and then copied into the target project.
+The copyable JavaScript files are in `template/`. The TypeScript source is in `template-typescript/`. This repository is meant to be cloned into a temporary location by an agent, reviewed, and then copied into the target project.
 
 ## Why
 
@@ -27,7 +27,7 @@ mkdir -p scripts/opencode-tsgo-lsp-proxy
 cp -R "$tmpdir/opencode-tsgo-lsp-proxy/template/"* scripts/opencode-tsgo-lsp-proxy/
 ```
 
-Before editing `opencode.json`, the installing agent should check the target project's runtime. Use `node` if the installed Node.js version can execute TypeScript syntax directly. If not, use the project's existing TypeScript runner, for example `tsx`, `bun`, or another already-approved runtime, and adjust the command below accordingly.
+The copied template is plain JavaScript and runs with `node`; no TypeScript runner is needed in the target project.
 
 ## opencode.json
 
@@ -37,7 +37,7 @@ Add or update the TypeScript LSP entry:
 {
   "lsp": {
     "typescript": {
-      "command": ["node", "scripts/opencode-tsgo-lsp-proxy/index.ts"],
+      "command": ["node", "scripts/opencode-tsgo-lsp-proxy/index.js"],
       "extensions": [".cjs", ".mjs", ".js", ".jsx", ".ts", ".tsx", ".mts", ".cts"]
     }
   }
@@ -56,7 +56,7 @@ Override the child command:
 {
   "lsp": {
     "typescript": {
-      "command": ["node", "scripts/opencode-tsgo-lsp-proxy/index.ts"],
+      "command": ["node", "scripts/opencode-tsgo-lsp-proxy/index.js"],
       "env": {
         "OPENCODE_TSGO_COMMAND": "./node_modules/.bin/tsgo --lsp --stdio"
       },
@@ -78,7 +78,8 @@ Enable debug logs:
 
 ## Files
 
-- `template/index.ts`: executable opencode LSP command to copy into your project.
-- `template/controller.ts`: restart/replay logic.
-- `template/parser.ts`: minimal LSP content-length frame parser.
-- `template/types.ts`: JSON-RPC and child-process types.
+- `template/index.js`: executable opencode LSP command to copy into your project.
+- `template/controller.js`: restart/replay logic.
+- `template/parser.js`: minimal LSP content-length frame parser.
+- `template/types.js`: empty runtime module emitted from TypeScript types.
+- `template-typescript/`: TypeScript source used to generate the JavaScript template.
