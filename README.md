@@ -8,7 +8,7 @@ The copyable files are in `template/`. This repository is meant to be cloned int
 
 ## Why
 
-Some opencode setups fail or become fragile when launching `tsgo --lsp --stdio` directly. This proxy starts `tsgo`, forwards LSP messages over stdio, restarts the child if it crashes, and replays the initialize/open-document state after a restart.
+Using `tsgo --lsp --stdio` directly in opencode can fail or keep hanging on diagnostics. This proxy starts `tsgo`, forwards LSP messages over stdio, restarts the child if it crashes, and replays the initialize/open-document state after a restart.
 
 It intentionally does not create extra `textDocument/diagnostic` requests. opencode may still request diagnostics itself after edits.
 
@@ -21,10 +21,9 @@ tmpdir="$(mktemp -d)"
 git clone https://github.com/LeonMueller-OneAndOnly/opencode-tsgo-lsp-proxy "$tmpdir/opencode-tsgo-lsp-proxy"
 mkdir -p scripts/opencode-tsgo-lsp-proxy
 cp -R "$tmpdir/opencode-tsgo-lsp-proxy/template/"* scripts/opencode-tsgo-lsp-proxy/
-pnpm add -D tsx
 ```
 
-If your project does not use `pnpm`, install `tsx` with your package manager, or use `npx tsx` in the config below.
+This template is meant to run with modern Node.js TypeScript support. If your Node.js version cannot execute `.ts` files directly, either upgrade Node.js or run the template through your preferred TypeScript runner.
 
 ## opencode.json
 
@@ -34,7 +33,7 @@ Add or update the TypeScript LSP entry:
 {
   "lsp": {
     "typescript": {
-      "command": ["npx", "tsx", "scripts/opencode-tsgo-lsp-proxy/index.ts"],
+      "command": ["node", "scripts/opencode-tsgo-lsp-proxy/index.ts"],
       "extensions": [".cjs", ".mjs", ".js", ".jsx", ".ts", ".tsx", ".mts", ".cts"]
     }
   }
@@ -53,7 +52,7 @@ Override the child command:
 {
   "lsp": {
     "typescript": {
-      "command": ["npx", "tsx", "scripts/opencode-tsgo-lsp-proxy/index.ts"],
+      "command": ["node", "scripts/opencode-tsgo-lsp-proxy/index.ts"],
       "env": {
         "OPENCODE_TSGO_COMMAND": "./node_modules/.bin/tsgo --lsp --stdio"
       },
