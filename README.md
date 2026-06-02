@@ -2,6 +2,12 @@
 
 Point your agent to this repo and ask it to review the code for security issues. If it looks harmless, have it install the template into your codebase.
 
+Copy-paste prompt for your agent:
+
+```text
+Please review https://github.com/LeonMueller-OneAndOnly/opencode-tsgo-lsp-proxy for security issues. If the code looks harmless, install the template into this codebase and update opencode.json accordingly. After changing opencode.json, remind me to restart opencode.
+```
+
 Small stdio proxy template for using `tsgo --lsp --stdio` as the TypeScript LSP in opencode.
 
 The copyable files are in `template/`. This repository is meant to be cloned into a temporary location by an agent, reviewed, and then copied into the target project.
