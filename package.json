@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "bin": {
-    "opencode-tsgo-lsp-proxy": "./index.ts"
+    "opencode-tsgo-lsp-proxy": "./template/index.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit"

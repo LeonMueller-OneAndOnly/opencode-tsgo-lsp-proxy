@@ -2,7 +2,9 @@
 
 Point your agent to this repo and tell it to check security issues and install it afterwards if it is harmless.
 
-Small stdio proxy for using `tsgo --lsp --stdio` as the TypeScript LSP in opencode.
+Small stdio proxy template for using `tsgo --lsp --stdio` as the TypeScript LSP in opencode.
+
+The copyable files are in `template/`. This repository is meant to be cloned into a temporary location by an agent, reviewed, and then copied into the target project.
 
 ## Why
 
@@ -15,9 +17,10 @@ It intentionally does not create extra `textDocument/diagnostic` requests. openc
 From your project root:
 
 ```sh
+tmpdir="$(mktemp -d)"
+git clone https://github.com/LeonMueller-OneAndOnly/opencode-tsgo-lsp-proxy "$tmpdir/opencode-tsgo-lsp-proxy"
 mkdir -p scripts/opencode-tsgo-lsp-proxy
-curl -L https://github.com/LeonMueller-OneAndOnly/opencode-tsgo-lsp-proxy/archive/refs/heads/main.tar.gz \
-  | tar -xz --strip-components=1 -C scripts/opencode-tsgo-lsp-proxy
+cp -R "$tmpdir/opencode-tsgo-lsp-proxy/template/"* scripts/opencode-tsgo-lsp-proxy/
 pnpm add -D tsx
 ```
 
@@ -72,7 +75,7 @@ Enable debug logs:
 
 ## Files
 
-- `index.ts`: executable opencode LSP command.
-- `controller.ts`: restart/replay logic.
-- `parser.ts`: minimal LSP content-length frame parser.
-- `types.ts`: JSON-RPC and child-process types.
+- `template/index.ts`: executable opencode LSP command to copy into your project.
+- `template/controller.ts`: restart/replay logic.
+- `template/parser.ts`: minimal LSP content-length frame parser.
+- `template/types.ts`: JSON-RPC and child-process types.
