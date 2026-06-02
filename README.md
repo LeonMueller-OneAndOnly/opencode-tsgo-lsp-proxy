@@ -23,7 +23,7 @@ mkdir -p scripts/opencode-tsgo-lsp-proxy
 cp -R "$tmpdir/opencode-tsgo-lsp-proxy/template/"* scripts/opencode-tsgo-lsp-proxy/
 ```
 
-This template is meant to run with modern Node.js TypeScript support. If your Node.js version cannot execute `.ts` files directly, either upgrade Node.js or run the template through your preferred TypeScript runner.
+Before editing `opencode.json`, the installing agent should check the target project's runtime. Use `node` if the installed Node.js version can execute TypeScript syntax directly. If not, use the project's existing TypeScript runner, for example `tsx`, `bun`, or another already-approved runtime, and adjust the command below accordingly.
 
 ## opencode.json
 
